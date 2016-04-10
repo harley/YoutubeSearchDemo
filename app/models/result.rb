@@ -14,8 +14,8 @@ class Result < ActiveRecord::Base
     end
   end
 
-  def videoId
-    raw["videoId"]
+  def video_id
+    raw["id"]["videoId"]
   end
 
   def snippet

@@ -1,15 +1,22 @@
 <h1>Youtube Search</h1>
 
-<%= form_tag nil, method: 'get', style: 'margin-bottom: 20px' do %>
+<%= form_tag nil, method: 'get', class: 'form-inline', style: 'margin-bottom: 20px' do %>
   <div class="form-group">
-  <%= text_field_tag :q, params[:q], class: 'form-control' %>
+    <%= text_field_tag :q, params[:q], class: 'form-control' %>
+    <%= submit_tag "Search", class: 'btn btn-secondary' %>
   </div>
-  <%= submit_tag "Search", class: 'btn btn-secondary' %>
 <% end %>
 
 <div class="row">
-  <div class="col-sm-6">
-    <table class="table">
+  <div class="col-sm-8">
+    <div id="youtube_video">
+      <% if params[:video_id] %>
+        <%= render 'video', video_id: params[:video_id] %>
+      <% end %>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <table class="results table table-condensed">
       <thead class="thead thead-default">
         <tr>
           <th>Title</th>
@@ -19,7 +26,7 @@
 
       <tbody class="tbody">
         <% @results.each do |result| %>
-          <tr>
+          <tr class="<%= 'table-active' if result.video_id == params[:video_id] %>">
             <td>
               <% if result.video? %>
                 <%= image_tag result.default_thumbnail_url, width: result.default_thumbnail_url, height: result.default_thumbnail_height %></td>
@@ -27,17 +34,14 @@
             <td>
               <div>
                 <span class="label label-primary"><%= result.result_type %></span>
-                <%= result.title %>
+                <%= link_to result.title, root_path(q: params[:q], video_id: result.video_id) %>
               </div>
               <%= result.description %>
             </td>
-            <td><%= result.videoId %></td>
           </tr>
         <% end %>
       </tbody>
     </table>
-  </div>
-  <div class="col-sm-6">
   </div>
 </div>
 

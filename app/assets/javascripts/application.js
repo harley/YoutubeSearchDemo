@@ -15,4 +15,6 @@
 //= require turbolinks
 //= require tether
 //= require bootstrap-sprockets
+//= require jquery.fitvids
+//= require results
 //= require_tree .
