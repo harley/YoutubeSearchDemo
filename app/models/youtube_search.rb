@@ -1,7 +1,11 @@
 require 'google/api_client'
 
 class YoutubeSearch
-  DEVELOPER_KEY = 'AIzaSyAiYpoyH1ytduemNagGHikWWGTVsO-Nc7Y'
+  # Please use your own API key and enable the Youtube API for it
+  # This default key is provided for your convenience but it will be invalid soon
+  # On Heroku, you can set `heroku config:set GOOGLE_API_KEY=your-key-value
+  # On localhost, you can set the GOOGLE_API_KEY ENV variable or use the dotenv gem
+  DEVELOPER_KEY = ENV['GOOGLE_API_KEY'] || 'AIzaSyAiYpoyH1ytduemNagGHikWWGTVsO-Nc7Y'
   YOUTUBE_API_SERVICE_NAME = 'youtube'
   YOUTUBE_API_VERSION = 'v3'
 
